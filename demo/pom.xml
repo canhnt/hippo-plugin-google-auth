@@ -61,6 +61,8 @@
   <properties>
 
     <!--***START temporary override of versions*** -->
+    <hippo.cms.version>3.2.0-google-auth-integration-SNAPSHOT</hippo.cms.version>
+    <hippo.forge.google-auth.version>1.0.0-SNAPSHOT</hippo.forge.google-auth.version>
     <!-- ***END temporary override of versions*** -->
 
     <essentials.version>2.1.1</essentials.version>
@@ -86,6 +88,12 @@
 
   <dependencyManagement>
     <dependencies>
+      <dependency>
+        <groupId>org.onehippo.forge.google-auth</groupId>
+        <artifactId>hippo-plugin-google-auth</artifactId>
+        <version>${hippo.forge.google-auth.version}</version>
+      </dependency>
+
       <dependency>
         <groupId>org.onehippo.cms7</groupId>
         <artifactId>hippo-essentials-plugin-sdk-api</artifactId>
