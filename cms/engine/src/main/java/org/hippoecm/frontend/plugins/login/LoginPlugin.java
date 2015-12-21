@@ -81,6 +81,11 @@ public class LoginPlugin extends RenderPlugin {
             final String edition = config.getString(EDITION);
             editionCss = new CssResourceReference(LoginPlugin.class, "login_" + edition + ".css");
         }
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
         ExternalLink termsAndConditions = new ExternalLink("termsAndConditions", TERMS_AND_CONDITIONS_LINK) {
             @Override

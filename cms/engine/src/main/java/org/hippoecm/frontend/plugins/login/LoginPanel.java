@@ -95,10 +95,14 @@ public class LoginPanel extends Panel {
         final char[] pwdAsChars = password == null ? new char[]{} : password.toCharArray();
         userSession.login(new UserCredentials(new SimpleCredentials(username, pwdAsChars)));
 
-        HttpSession session = WebApplicationHelper.retrieveWebRequest().getContainerRequest().getSession(true);
-        ConcurrentLoginFilter.validateSession(session, username, false);
+        validateSession();
 
         userSession.setLocale(new Locale(selectedLocale));
+    }
+
+    protected void validateSession() {
+        HttpSession session = WebApplicationHelper.retrieveWebRequest().getContainerRequest().getSession(true);
+        ConcurrentLoginFilter.validateSession(session, username, false);
     }
 
     protected void loginFailed(final Cause cause) {
