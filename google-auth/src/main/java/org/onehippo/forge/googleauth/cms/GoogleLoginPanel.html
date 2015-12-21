@@ -1,0 +1,40 @@
+<html xmlns:wicket="http://wicket.apache.org/">
+  <body>
+    <wicket:head>
+      <script src="https://apis.google.com/js/platform.js?onload=renderButton" async defer></script>
+
+      <script>
+        function renderButton() {
+          console.log("render");
+          gapi.load('auth2,signin2', function () {
+            var auth2 = gapi.auth2.init();
+            auth2.then(function () {
+              var isSignedIn = auth2.isSignedIn.get();
+
+              gapi.signin2.render('hippo-google-signin-id', {
+                width: 240,
+                theme: 'dark',
+                onsuccess: isSignedIn ? null : submitGoogleUser
+              });
+
+              if (isSignedIn) {
+                $('#hippo-google-signin-id').click(onSignIn);
+              }
+            });
+          });
+        }
+        function onSignIn() {
+          var auth2 = gapi.auth2.getAuthInstance();
+          auth2.currentUser.listen(submitGoogleUser);
+        }
+      </script>
+    </wicket:head>
+    <wicket:panel>
+      <wicket:extend>
+        <div class="hippo-google-signin-container">
+          <div id="hippo-google-signin-id" class="hippo-google-signin-button"></div>
+        </div>
+      </wicket:extend>
+    </wicket:panel>
+  </body>
+</html>
