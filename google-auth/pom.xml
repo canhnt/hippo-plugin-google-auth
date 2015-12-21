@@ -26,9 +26,11 @@
   <properties>
     <jcr.version>2.0</jcr.version>
 
+    <hippo.commons.version>2.2.0-SNAPSHOT</hippo.commons.version>
     <hippo.cms.version>3.2.0-google-auth-integration-SNAPSHOT</hippo.cms.version>
-
-    <google.api.client.version>1.19.1</google.api.client.version>
+    <hippo.hst.version>3.2.0-SNAPSHOT</hippo.hst.version>
+    <hippo.repository.version>3.2.0-SNAPSHOT</hippo.repository.version>
+    <google.api.client.version>1.21.0</google.api.client.version>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.javaVersion>1.8</project.build.javaVersion>
