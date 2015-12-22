@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?><sv:node xmlns:sv="http://www.jcp.org/jcr/sv/1.0" xmlns:esv="http://www.onehippo.org/jcr/xmlimport" sv:name="login" esv:merge="combine">
+  <sv:node sv:name="login" esv:merge="combine">
+    <sv:node sv:name="loginPage" esv:merge="combine">
+      <sv:property sv:name="google.signin.scope" sv:type="String">
+        <sv:value>profile</sv:value>
+      </sv:property>
+      <sv:property sv:name="plugin.class" sv:type="String" esv:merge="override">
+        <sv:value>org.onehippo.forge.googleauth.cms.GoogleLoginPlugin</sv:value>
+      </sv:property>
+      <sv:property sv:name="google.signin.clientid" sv:type="String">
+        <sv:value>832528604166-nt3qbcpn7kh1knntmeu7thapnhoadf5o.apps.googleusercontent.com</sv:value>
+      </sv:property>
+    </sv:node>
+  </sv:node>
+</sv:node>

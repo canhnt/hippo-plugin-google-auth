@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?><sv:node xmlns:sv="http://www.jcp.org/jcr/sv/1.0" xmlns:esv="http://www.onehippo.org/jcr/xmlimport" sv:name="internal" esv:merge="combine">
+  <sv:property sv:name="hipposys:classname" sv:type="String" esv:merge="override">
+    <sv:value>org.onehippo.forge.googleauth.repository.GoogleSignInSecurityProvider</sv:value>
+  </sv:property>
+</sv:node>

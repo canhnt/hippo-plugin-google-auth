@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <sv:node xmlns:ae="http://www.onehippo.org/jcr/autoexport/1.0" xmlns:sv="http://www.jcp.org/jcr/sv/1.0" ae:id="hippo-plugin-google-auth-demo" sv:name="hippo:initialize">
   <sv:property sv:name="jcr:primaryType" sv:type="Name">
     <sv:value>hippo:initializefolder</sv:value>
@@ -561,4 +561,32 @@
     </sv:property>
   </sv:node>
 
+<sv:node sv:name="hippo-plugin-google-auth-demo-hippo-configuration-hippo-frontend-login">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+      <sv:value>hippo:initializeitem</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippo:sequence" sv:type="Double">
+      <sv:value>30000.3</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippo:contentresource" sv:type="String">
+      <sv:value>configuration/frontend/login.xml</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippo:contentroot" sv:type="String">
+      <sv:value>/hippo:configuration/hippo:frontend</sv:value>
+    </sv:property>
+  </sv:node>
+  <sv:node sv:name="hippo-plugin-google-auth-demo-hippo-configuration-hippo-security-internal">
+    <sv:property sv:name="jcr:primaryType" sv:type="Name">
+      <sv:value>hippo:initializeitem</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippo:sequence" sv:type="Double">
+      <sv:value>30000.3</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippo:contentresource" sv:type="String">
+      <sv:value>configuration/security/internal.xml</sv:value>
+    </sv:property>
+    <sv:property sv:name="hippo:contentroot" sv:type="String">
+      <sv:value>/hippo:configuration/hippo:security</sv:value>
+    </sv:property>
+  </sv:node>
 </sv:node>
