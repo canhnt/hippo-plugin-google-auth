@@ -27,11 +27,14 @@ import javax.jcr.SimpleCredentials;
 import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.MetaDataHeaderItem;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.cycle.RequestCycle;
+import org.apache.wicket.request.resource.CssResourceReference;
+import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.template.PackageTextTemplate;
 import org.hippoecm.frontend.model.UserCredentials;
 import org.hippoecm.frontend.plugins.login.LoginHandler;
@@ -43,6 +46,7 @@ import org.onehippo.forge.googleauth.GHippoCredential;
 
 public class GoogleLoginPanel extends LoginPanel {
     public static final String JS_SCRIPT = "g-signin-config.js";
+    private static final ResourceReference STYLE_CSS = new CssResourceReference(GoogleLoginPanel.class, "google-login-panel.css");;
 
     public static final String METATAG_GOOGLE_SIGNIN_SCOPE = "google-signin-scope";
     public static final String METATAG_GOOGLE_SIGNIN_CLIENT_ID = "google-signin-client_id";
@@ -104,6 +108,7 @@ public class GoogleLoginPanel extends LoginPanel {
     public void renderHead(final IHeaderResponse response) {
         super.renderHead(response);
 
+        response.render(CssHeaderItem.forReference(STYLE_CSS));
         renderSignInParameters(response);
 
         PackageTextTemplate jsTmpl = new PackageTextTemplate(GoogleLoginPanel.class, JS_SCRIPT);

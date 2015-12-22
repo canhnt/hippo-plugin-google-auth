@@ -1,0 +1,7 @@
+.hippo-login-panel-center .hippo-google-signin-container {
+  text-align: center;
+}
+
+.hippo-login-panel-center .hippo-google-signin-container .hippo-google-signin-button {
+  display: inline-block;
+}

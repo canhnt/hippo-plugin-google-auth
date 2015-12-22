@@ -369,6 +369,7 @@
           <include>**/*.xml</include>
           <include>**/*.ico</include>
           <include>**/*.js</include>
+          <include>**/*.css</include>
         </includes>
       </resource>
     </resources>
