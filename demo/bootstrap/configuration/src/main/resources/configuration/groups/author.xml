@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?><sv:node xmlns:sv="http://www.jcp.org/jcr/sv/1.0" xmlns:esv="http://www.onehippo.org/jcr/xmlimport" sv:name="author" esv:merge="combine">
+  <sv:property sv:name="hipposys:members" sv:type="String" esv:merge="override" sv:multiple="true">
+    <sv:value>author</sv:value>
+    <sv:value>canhnt@gmail.com</sv:value>
+  </sv:property>
+</sv:node>
