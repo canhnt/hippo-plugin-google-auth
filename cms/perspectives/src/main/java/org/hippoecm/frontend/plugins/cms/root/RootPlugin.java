@@ -15,10 +15,13 @@
  */
 package org.hippoecm.frontend.plugins.cms.root;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.wicket.feedback.IFeedbackMessageFilter;
 import org.apache.wicket.markup.ComponentTag;
 import org.apache.wicket.markup.head.IHeaderResponse;
@@ -73,6 +76,7 @@ public class RootPlugin extends TabsPlugin {
 
     public static final String CONFIG_PINGER_INTERVAL = "pinger.interval";
     public static final String CONFIG_MAX_INACTIVE_INTERVAL_MINUTES = "max.inactive.interval.minutes";
+    public static final String CONFIG_USERMENU = "usermenu.class";
 
     private boolean rendered = false;
     private final ExtWidgetRegistry extWidgetRegistry;
@@ -200,8 +204,30 @@ public class RootPlugin extends TabsPlugin {
 
     private void addUserMenu() {
         final ILogoutService logoutService = getPluginContext().getService(ILogoutService.SERVICE_ID, ILogoutService.class);
-        add(new UserMenu("userMenu", getCurrentUser(), logoutService));
+
+        UserMenu userMenu = loadCustomUserMenu(logoutService);
+        if (userMenu == null) {
+            userMenu = new UserMenu("userMenu", getCurrentUser(), logoutService);
+        }
+        add(userMenu);
         add(new ActiveLogoutPlugin("activeLogout", getMaxInactiveIntervalMinutes(), logoutService));
+    }
+
+    private UserMenu loadCustomUserMenu(final ILogoutService logoutService) {
+        UserMenu userMenu = null;
+
+        final String userMenuClass = getPluginConfig().getString(CONFIG_USERMENU);
+        if (StringUtils.isNotEmpty(userMenuClass)) {
+            try {
+                final Class<? extends UserMenu> clazz = (Class<? extends UserMenu>) Class.forName(userMenuClass);
+                final Constructor<? extends UserMenu> constructor = clazz.getConstructor(String.class, User.class, ILogoutService.class);
+                userMenu = constructor.newInstance("userMenu", getCurrentUser(), logoutService);
+            } catch (ClassNotFoundException | NoSuchMethodException | InvocationTargetException |
+                    InstantiationException | IllegalAccessException e) {
+                log.error("Invalid usermenu.class configuration '{}'. Use the default user menu", userMenuClass);
+            }
+        }
+        return userMenu;
     }
 
     private Integer getMaxInactiveIntervalMinutes() {

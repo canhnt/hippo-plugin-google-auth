@@ -35,10 +35,20 @@ public class UserMenu extends Panel {
     public static final JavaScriptResourceReference SCRIPT_REFERENCE =
             new JavaScriptResourceReference(UserMenu.class, "UserMenu.js");
 
+    private final User user;
+    private final ILogoutService logoutService;
+
     public UserMenu(final String id, final User user, final ILogoutService logoutService) {
         super(id);
 
+        this.user = user;
+        this.logoutService = logoutService;
         setRenderBodyOnly(true);
+    }
+
+    @Override
+    protected void onInitialize() {
+        super.onInitialize();
 
         add(HippoIcon.fromSprite("icon", Icon.USER_CIRCLE, IconSize.XL));
 
