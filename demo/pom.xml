@@ -324,13 +324,6 @@
                     <context>/site</context>
                   </properties>
                 </deployable>
-                <deployable>
-                  <location>${project.basedir}/essentials/target/essentials.war</location>
-                  <type>war</type>
-                  <properties>
-                    <context>/essentials</context>
-                  </properties>
-                </deployable>
               </deployables>
               <container>
                 <systemProperties>
