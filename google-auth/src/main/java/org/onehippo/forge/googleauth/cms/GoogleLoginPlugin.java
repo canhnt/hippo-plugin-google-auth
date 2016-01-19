@@ -19,16 +19,16 @@ package org.onehippo.forge.googleauth.cms;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.wicket.Component;
 import org.hippoecm.frontend.plugin.IPluginContext;
 import org.hippoecm.frontend.plugin.config.IPluginConfig;
 import org.hippoecm.frontend.plugins.login.LoginHandler;
-import org.hippoecm.frontend.plugins.login.LoginPanel;
-import org.hippoecm.frontend.plugins.login.LoginPlugin;
+import org.hippoecm.frontend.plugins.login.SimpleLoginPlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class GoogleLoginPlugin extends LoginPlugin {
+public class GoogleLoginPlugin extends SimpleLoginPlugin {
     private static final Logger log = LoggerFactory.getLogger(GoogleLoginPlugin.class);
 
     public static final String GOOGLE_SIGNIN_CLIENTID = "google.signin.clientid";
@@ -41,6 +41,7 @@ public class GoogleLoginPlugin extends LoginPlugin {
         super(context, config);
         clientId = config.getString(GOOGLE_SIGNIN_CLIENTID);
         scope = config.getString(GOOGLE_SIGNIN_SCOPE);
+
         if (StringUtils.isEmpty(clientId)) {
             log.error("Missing plugin paramemter '{}'", GOOGLE_SIGNIN_CLIENTID);
         }
@@ -51,10 +52,11 @@ public class GoogleLoginPlugin extends LoginPlugin {
     }
 
     @Override
-    protected LoginPanel createLoginPanel(final String id,
-                                          final boolean autoComplete,
-                                          final List<String> locales,
-                                          final LoginHandler handler) {
+    protected Component createLoginPanelHeader(final String id,
+                                               final boolean autoComplete,
+                                               final List<String> locales,
+                                               final LoginHandler handler) {
+//        return super.createLoginPanelHeader(id, autoComplete, locales, handler);
         return new GoogleLoginPanel(id, autoComplete, locales, handler, clientId, scope);
     }
 }

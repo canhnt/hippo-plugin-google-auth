@@ -21,30 +21,40 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.MissingResourceException;
 
 import javax.jcr.SimpleCredentials;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.wicket.Application;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.MetaDataHeaderItem;
+import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.template.PackageTextTemplate;
+import org.hippoecm.frontend.Main;
 import org.hippoecm.frontend.model.UserCredentials;
+import org.hippoecm.frontend.plugins.login.ConcurrentLoginFilter;
 import org.hippoecm.frontend.plugins.login.LoginHandler;
-import org.hippoecm.frontend.plugins.login.LoginPanel;
 import org.hippoecm.frontend.session.LoginException;
 import org.hippoecm.frontend.session.PluginUserSession;
+import org.hippoecm.frontend.util.WebApplicationHelper;
 import org.onehippo.forge.googleauth.GHippoCredential;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
-public class GoogleLoginPanel extends LoginPanel {
+public class GoogleLoginPanel extends Panel {
+    private static final Logger log = LoggerFactory.getLogger(GoogleLoginPanel.class);
+
     public static final String JS_SCRIPT = "g-signin-config.js";
     private static final ResourceReference STYLE_CSS = new CssResourceReference(GoogleLoginPanel.class, "google-login-panel.css");;
 
@@ -52,11 +62,16 @@ public class GoogleLoginPanel extends LoginPanel {
     public static final String METATAG_GOOGLE_SIGNIN_CLIENT_ID = "google-signin-client_id";
     private static final char[] EMPTY_PASSWORD = new char[]{0};
 
+    private final static String DEFAULT_KEY = "invalid.login";
+
     private final String googleSignInClientId;
     private final String googleSignInScope;
+    private final LoginHandler handler;
+    private final List<String> locales;
 
     private AbstractDefaultAjaxBehavior ajaxCallBackGoogleSignIn;
     private GHippoCredential gCredential;
+    private String username;
 
     public GoogleLoginPanel(final String id,
                             final boolean autoComplete,
@@ -64,7 +79,10 @@ public class GoogleLoginPanel extends LoginPanel {
                             final LoginHandler handler,
                             final String googleSignInClientId,
                             final String googleSignInScope) {
-        super(id, autoComplete, locales, handler);
+        super(id);
+
+        this.handler = handler;
+        this.locales = locales;
 
         this.googleSignInClientId = googleSignInClientId;
         this.googleSignInScope = googleSignInScope;
@@ -133,8 +151,35 @@ public class GoogleLoginPanel extends LoginPanel {
 
         userSession.login(new UserCredentials(creds));
 
-        validateSession();
-        userSession.setLocale(new Locale(selectedLocale));
+        HttpSession session = WebApplicationHelper.retrieveWebRequest().getContainerRequest().getSession(true);
+        ConcurrentLoginFilter.validateSession(session, username, false);
+        userSession.setLocale(new Locale(locales.get(0)));
 
+    }
+
+    protected  void loginSuccess() {
+        if (handler != null) {
+            handler.loginSuccess();
+        }
+    }
+
+    protected void loginFailed(final LoginException.Cause cause) {
+        Main main = (Main) Application.get();
+        main.resetConnection();
+
+        info(getReason(cause));
+    }
+
+    private String getReason(final LoginException.Cause cause) {
+        if (cause != null) {
+            try {
+                final String reason = getString(cause.getKey());
+                if (reason != null) {
+                    return reason;
+                }
+            } catch (MissingResourceException ignore) {
+            }
+        }
+        return getString(DEFAULT_KEY);
     }
 }
