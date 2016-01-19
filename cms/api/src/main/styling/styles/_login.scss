@@ -43,7 +43,7 @@
 }
 
 
-.hippo-login-panel-header {
+.hippo-login-panel-header .login-panel-logo {
   height: $login-panel-header-height;
   background: $login-panel-header-bgcolor url('#{$images}/login/login-header.svg') no-repeat scroll center center;
   background-size: 305px;

@@ -69,7 +69,7 @@ public class ConcurrentLoginFilter implements Filter {
         }
     }
 
-    static void validateSession(HttpSession session, String user, boolean allowConcurrent) {
+    public static void validateSession(HttpSession session, String user, boolean allowConcurrent) {
         ServletContext context = session.getServletContext();
         String match = (String)context.getAttribute(ATTRIBUTE_SESSIONMATCH + "." + user);
         if (allowConcurrent && match != null) {

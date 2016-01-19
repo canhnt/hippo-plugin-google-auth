@@ -1,5 +1,5 @@
 /*
- *  Copyright 2010-2015 Hippo B.V. (http://www.onehippo.com)
+ *  Copyright 2010-2016 Hippo B.V. (http://www.onehippo.com)
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ package org.hippoecm.frontend.plugins.login;
 import java.util.Arrays;
 import java.util.List;
 
+import org.apache.wicket.Component;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.core.request.mapper.AbstractComponentMapper;
 import org.apache.wicket.markup.head.CssHeaderItem;
@@ -25,6 +26,7 @@ import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.link.ExternalLink;
 import org.apache.wicket.markup.html.link.ResourceLink;
+import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.request.Request;
 import org.apache.wicket.request.Url;
 import org.apache.wicket.request.cycle.RequestCycle;
@@ -101,7 +103,11 @@ public class LoginPlugin extends RenderPlugin {
         if (localeArray == null) {
             localeArray = DEFAULT_LOCALES;
         }
-        add(createLoginPanel("login-panel", autoComplete, Arrays.asList(localeArray), new LoginPluginHandler(termsAndConditions)));
+
+        final List<String> locales = Arrays.asList(localeArray);
+        final LoginPluginHandler handler = new LoginPluginHandler(termsAndConditions);
+        add(createLoginPanelHeader("login-panel-header", autoComplete, locales, handler));
+        add(createLoginPanel("login-panel", autoComplete, locales, handler));
 
         add(new Label("pinger"));
     }
@@ -142,6 +148,11 @@ public class LoginPlugin extends RenderPlugin {
         final PluginApplication application = (PluginApplication) getApplication();
         final ResourceReference reference = application.getPluginApplicationFavIconReference();
         return reference != null ? reference: DEFAULT_FAVICON;
+    }
+
+    protected Component createLoginPanelHeader(final String id, final boolean autoComplete, final List<String> locales,
+                                               final LoginHandler handler) {
+        return new EmptyPanel(id);
     }
 
     protected LoginPanel createLoginPanel(final String id, final boolean autoComplete, final List<String> locales,
