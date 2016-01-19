@@ -281,7 +281,6 @@
         <module>bootstrap</module>
         <module>cms</module>
         <module>site</module>
-        <module>essentials</module>
       </modules>
     </profile>
 
