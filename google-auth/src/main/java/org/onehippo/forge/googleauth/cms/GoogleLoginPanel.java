@@ -34,6 +34,7 @@ import org.apache.wicket.markup.head.CssHeaderItem;
 import org.apache.wicket.markup.head.IHeaderResponse;
 import org.apache.wicket.markup.head.JavaScriptReferenceHeaderItem;
 import org.apache.wicket.markup.head.MetaDataHeaderItem;
+import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.request.IRequestParameters;
 import org.apache.wicket.request.cycle.RequestCycle;
@@ -64,6 +65,8 @@ public class GoogleLoginPanel extends Panel {
 
     private final static String DEFAULT_KEY = "invalid.login";
 
+    private final FeedbackPanel feedback;
+
     private final String googleSignInClientId;
     private final String googleSignInScope;
     private final LoginHandler handler;
@@ -81,11 +84,17 @@ public class GoogleLoginPanel extends Panel {
                             final String googleSignInScope) {
         super(id);
 
+
         this.handler = handler;
         this.locales = locales;
 
         this.googleSignInClientId = googleSignInClientId;
         this.googleSignInScope = googleSignInScope;
+
+        add(feedback = new FeedbackPanel("feedback"));
+        feedback.setOutputMarkupId(true);
+        feedback.setEscapeModelStrings(false);
+        feedback.setFilter(message -> !message.isRendered());
 
         add(ajaxCallBackGoogleSignIn = new AbstractDefaultAjaxBehavior() {
             @Override
@@ -100,7 +109,7 @@ public class GoogleLoginPanel extends Panel {
                 //FIXME: should not be as simple as this
                 username = getUsernameFromEmail(email);
 
-                log.warn("Google user information:\nid={}\nname={}\nemail={}\nid_token={}",
+                log.debug("Google user information:\nid={}\nname={}\nemail={}\nid_token={}",
                         id, name, email, id_token);
 
                 try {
@@ -109,10 +118,12 @@ public class GoogleLoginPanel extends Panel {
                 } catch (LoginException le) {
                     log.debug("Login failure!", le);
                     loginFailed(le.getLoginExceptionCause());
+                    target.add(feedback);
                 } catch (AccessControlException ace) {
                     // Invalidate the current obtained JCR session and create an anonymous one
                     PluginUserSession.get().login();
                     loginFailed(LoginException.Cause.ACCESS_DENIED);
+                    target.add(feedback);
                 }
             }
         });
