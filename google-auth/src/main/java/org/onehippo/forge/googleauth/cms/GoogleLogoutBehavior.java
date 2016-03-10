@@ -1,5 +1,5 @@
 /*
- *  Copyright 2015 Hippo B.V. (http://www.onehippo.com)
+ *  Copyright 2015-2016 Hippo B.V. (http://www.onehippo.com)
  *
  *  Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
@@ -37,7 +37,7 @@ public class GoogleLogoutBehavior extends AbstractAjaxBehavior{
     public void renderHead(final Component component, final IHeaderResponse response) {
         super.renderHead(component, response);
         response.render(MetaDataHeaderItem.forMetaTag("google-signin-scope", "profile email"));
-        response.render(MetaDataHeaderItem.forMetaTag("google-signin-client_id", GOOGLE_SIGNIN_CLIENTID));
+        response.render(MetaDataHeaderItem.forMetaTag("google-signin-client_id", getGoogleSignInClientId()));
         response.render(JavaScriptHeaderItem.forReference(GOOGLE_SIGNIN_LOGOUT_SCRIPT));
 
         final UrlResourceReference googleSignInJsReference = new UrlResourceReference(Url.parse(GOOGLE_SIGNIN_LIBRARY));
@@ -46,5 +46,9 @@ public class GoogleLogoutBehavior extends AbstractAjaxBehavior{
 
     @Override
     public void onRequest() {
+    }
+
+    public String getGoogleSignInClientId() {
+        return GOOGLE_SIGNIN_CLIENTID;
     }
 }

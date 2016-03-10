@@ -12,7 +12,6 @@
   <packaging>pom</packaging>
 
   <modules>
-    <module>cms</module>
     <module>google-auth</module>
     <module>demo</module>
   </modules>
