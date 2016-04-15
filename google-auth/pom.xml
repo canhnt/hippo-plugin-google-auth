@@ -26,7 +26,7 @@
   <properties>
     <jcr.version>2.0</jcr.version>
 
-    <hippo.cms.version>4.0.0-SNAPSHOT</hippo.cms.version>
+    <hippo.cms.version>4.0.0-CMS-9884-SNAPSHOT</hippo.cms.version>
     <hippo.hst.version>4.0.0-SNAPSHOT</hippo.hst.version>
     <hippo.repository.version>4.0.0-SNAPSHOT</hippo.repository.version>
     <google.api.client.version>1.21.0</google.api.client.version>
