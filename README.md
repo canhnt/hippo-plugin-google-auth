@@ -13,14 +13,9 @@ Add/modify values to the configuration path at `/hippo:configuration/hippo:front
   * Type: `String`
   * Value: `profile`
 
-## Logout menu
-Add the property to the configuration path at `/hippo:configuration/hippo:frontend/cms/cms-static/root`
-* Property: `usermenu.class`
-* Type: `String`
-* Value: `org.onehippo.forge.googleauth.cms.GoogleLogoutUserMenu`
-
 ## Security provider
-Configure the security provider at `/hippo:configuration/hippo:security/internal`
-* Property: `hipposys:classname`
-* Type: `String`
-* Value: `org.onehippo.forge.googleauth.repository.GoogleSignInSecurityProvider`
+Create a new security provider at `/hippo:configuration/hippo:security/`
+```
++ google-signin (hipposys:securityprovider)
+  - hipposys:classname (String): org.onehippo.forge.googleauth.repository.GoogleSignInSecurityProvider
+```
