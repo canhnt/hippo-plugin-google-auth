@@ -19,6 +19,8 @@ package org.onehippo.forge.googleauth.repository;
 import java.io.IOException;
 import java.security.GeneralSecurityException;
 
+import org.apache.jackrabbit.util.Text;
+
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
@@ -69,7 +71,7 @@ public class GoogleSignInUserManager extends AbstractRepositoryUserManager {
     }
 
     private String getUserRootPath() {
-        return "/hippo:configuration/hippo:users";
+        return "hippo:configuration/hippo:users";
     }
 
     /**
@@ -80,15 +82,12 @@ public class GoogleSignInUserManager extends AbstractRepositoryUserManager {
      */
     @Override
     public Node getUser(final String userEmailId) throws RepositoryException {
-        final String rootUserPath = getUserRootPath();
-        if (session.getRootNode().hasNode(rootUserPath)) {
-            final Node rootUsersNode = session.getRootNode().getNode(rootUserPath);
-            final NodeIterator userNodes = rootUsersNode.getNodes();
-            while (userNodes.hasNext()) {
-                final Node userNode = userNodes.nextNode();
-                if (userNode.getPrimaryNodeType().isNodeType(HippoNodeType.NT_USER) && hasEmail(userNode, userEmailId)) {
-                    return userNode;
-                }
+        final String userNodePath = getUserRootPath() + "/" + Text.escapeIllegalJcrChars(userEmailId);
+
+        if (session.getRootNode().hasNode(userNodePath)) {
+            final Node userNode = session.getRootNode().getNode(userNodePath);
+            if (userNode.getPrimaryNodeType().isNodeType(HippoNodeType.NT_USER) && hasEmail(userNode, userEmailId)) {
+                return userNode;
             }
         }
         return null;
@@ -140,16 +139,17 @@ public class GoogleSignInUserManager extends AbstractRepositoryUserManager {
 
     @Override
     public void syncUserInfo(final String userId) {
+        log.info("Syncing user info of '{}'", userId);
     }
 
     @Override
     public void updateLastLogin(final String userId) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        log.info("Updating last login for user '{}'", userId);
     }
 
     @Override
     public void saveUsers() throws RepositoryException {
-        throw new UnsupportedOperationException("Not supported yet.");
+        log.info("Saving users");
     }
 
     @Override

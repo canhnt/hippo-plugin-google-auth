@@ -19,12 +19,10 @@ package org.onehippo.forge.googleauth.repository;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
 
-import org.apache.jackrabbit.api.security.user.UserManager;
 import org.hippoecm.repository.security.AbstractSecurityProvider;
 import org.hippoecm.repository.security.ManagerContext;
 import org.hippoecm.repository.security.SecurityProviderContext;
 import org.hippoecm.repository.security.group.RepositoryGroupManager;
-import org.hippoecm.repository.security.user.AbstractUserManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -41,24 +39,30 @@ public class GoogleSignInSecurityProvider extends AbstractSecurityProvider {
 
         mgrContext = new ManagerContext(context.getSession(), context.getProviderPath(), context.getUsersPath(), context.isMaintenanceMode());
         createUserManager(mgrContext);
-
-        mgrContext = new ManagerContext(context.getSession(), context.getProviderPath(), context.getGroupsPath(), context.isMaintenanceMode());
-        groupManager = new RepositoryGroupManager();
-        groupManager.init(mgrContext);
+        createGroupManager(context);
     }
 
     @Override
-    public UserManager getUserManager(final Session session) throws RepositoryException {
+    public AbstractRepositoryUserManager getUserManager(final Session session) throws RepositoryException {
         final ManagerContext mgrContext = new ManagerContext(session, context.getProviderPath(),
                 context.getUsersPath(), context.isMaintenanceMode());
-        
+
         createUserManager(mgrContext);
-        return userManager;
+
+        return (AbstractRepositoryUserManager) userManager;
     }
 
-    protected UserManager createUserManager(final ManagerContext mgrContext) throws RepositoryException {
-        userManager = new GoogleSignInUserManager();
-        ((AbstractUserManager)userManager).init(mgrContext);
-        return userManager;
+
+    private void createUserManager(final ManagerContext mgrContext) throws RepositoryException {
+        final AbstractRepositoryUserManager abstractUserManager = new GoogleSignInUserManager();
+        userManager = abstractUserManager;
+        abstractUserManager.init(mgrContext);
+    }
+
+    private void createGroupManager(final SecurityProviderContext context) throws RepositoryException {
+        final ManagerContext mgrContext;
+        mgrContext = new ManagerContext(context.getSession(), context.getProviderPath(), context.getGroupsPath(), context.isMaintenanceMode());
+        groupManager = new RepositoryGroupManager();
+        groupManager.init(mgrContext);
     }
 }
