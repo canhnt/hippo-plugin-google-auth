@@ -1,4 +1,4 @@
-# Google Authentication Plugin for Hippo
+# Google Authentication Plugin for Hippo CMS 11
 
 # Configuration
 ## Login page
