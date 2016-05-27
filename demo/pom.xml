@@ -5,7 +5,7 @@
   <parent>
     <groupId>org.onehippo.cms7</groupId>
     <artifactId>hippo-cms7-release</artifactId>
-    <version>10.1.1</version>
+    <version>11.0.0-SNAPSHOT</version>
   </parent>
 
   <name>Hippo Plugin Google-Auth Demo</name>
@@ -61,7 +61,7 @@
   <properties>
 
     <!--***START temporary override of versions*** -->
-    <hippo.cms.version>3.2.0-google-auth-integration-SNAPSHOT</hippo.cms.version>
+    <hippo.cms.version>4.0.0-CMS-9884-SNAPSHOT</hippo.cms.version>
     <hippo.forge.google-auth.version>1.0.0-SNAPSHOT</hippo.forge.google-auth.version>
     <!-- ***END temporary override of versions*** -->
 

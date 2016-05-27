@@ -8,10 +8,13 @@
   <sv:property sv:name="hipposys:password" sv:type="String">
     <sv:value>$SHA-1$i26MCgrO94E=$reI+NOE+mcc111n9XJjUzwYMLBo=</sv:value>
   </sv:property>
+  <sv:property sv:name="hipposys:email" sv:type="String">
+    <sv:value>canhnt@gmail.com</sv:value>
+  </sv:property>
   <sv:property sv:name="hipposys:passwordlastmodified" sv:type="Date">
     <sv:value>2015-12-22T10:29:04.673+01:00</sv:value>
   </sv:property>
   <sv:property sv:name="hipposys:securityprovider" sv:type="String">
-    <sv:value>internal</sv:value>
+    <sv:value>google-auth</sv:value>
   </sv:property>
 </sv:node>

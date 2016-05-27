@@ -1,0 +1,4 @@
+[external "cms"]
+	path = cms
+	url = git@code.onehippo.org:cms-community/hippo-cms.git
+	branch = feature/CMS-9884

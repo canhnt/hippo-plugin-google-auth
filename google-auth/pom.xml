@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
-  Copyright 2015 Hippo B.V. (http://www.onehippo.com)
- 
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
- 
-       http://www.apache.org/licenses/LICENSE-2.0
- 
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License.
--->
+  ~ Copyright 2016 Canh Ngo (canhnt [at] gmail.com)
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
 
@@ -26,12 +26,12 @@
   <properties>
     <jcr.version>2.0</jcr.version>
 
-    <hippo.commons.version>2.2.0-SNAPSHOT</hippo.commons.version>
-    <hippo.cms.version>3.2.0-google-auth-integration-SNAPSHOT</hippo.cms.version>
-    <hippo.hst.version>3.2.0-SNAPSHOT</hippo.hst.version>
-    <hippo.repository.version>3.2.0-SNAPSHOT</hippo.repository.version>
+    <hippo.cms.version>4.0.0-CMS-9884-SNAPSHOT</hippo.cms.version>
+    <hippo.hst.version>4.0.0-SNAPSHOT</hippo.hst.version>
+    <hippo.repository.version>4.0.0-SNAPSHOT</hippo.repository.version>
     <google.api.client.version>1.21.0</google.api.client.version>
 
+    <jackrabbit.version>2.10.1</jackrabbit.version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.build.javaVersion>1.8</project.build.javaVersion>
 
@@ -109,6 +109,13 @@
     </dependency>
 
     <dependency>
+      <groupId>org.apache.jackrabbit</groupId>
+      <artifactId>jackrabbit-api</artifactId>
+      <version>${jackrabbit.version}</version>
+      <scope>provided</scope>
+    </dependency>
+
+    <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-api</artifactId>
       <version>${lib.slf4j.version}</version>
@@ -119,13 +126,6 @@
       <groupId>javax.servlet</groupId>
       <artifactId>javax.servlet-api</artifactId>
       <version>3.0.1</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.onehippo.cms7</groupId>
-      <artifactId>hippo-cms7-commons</artifactId>
-      <version>${hippo.commons.version}</version>
       <scope>provided</scope>
     </dependency>
 
