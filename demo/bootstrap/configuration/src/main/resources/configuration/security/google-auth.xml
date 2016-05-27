@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?><sv:node xmlns:sv="http://www.jcp.org/jcr/sv/1.0" sv:name="google-auth">
+  <sv:property sv:name="jcr:primaryType" sv:type="Name">
+    <sv:value>hipposys:securityprovider</sv:value>
+  </sv:property>
+  <sv:property sv:name="hipposys:classname" sv:type="String">
+    <sv:value>org.onehippo.forge.googleauth.repository.GoogleSignInSecurityProvider</sv:value>
+  </sv:property>
+</sv:node>
