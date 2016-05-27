@@ -19,3 +19,8 @@ Create a new security provider at `/hippo:configuration/hippo:security/`
 + google-signin (hipposys:securityprovider)
   - hipposys:classname (String): org.onehippo.forge.googleauth.repository.GoogleSignInSecurityProvider
 ```
+
+##Screenshot
+![Login screenshot](https://github.com/canhnt/hippo-plugin-google-auth/blob/gh-pages/hippo-login-google.png?raw=true)
+
+
