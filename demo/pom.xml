@@ -89,8 +89,8 @@
   <dependencyManagement>
     <dependencies>
       <dependency>
-        <groupId>org.onehippo.forge.google-auth</groupId>
-        <artifactId>hippo-plugin-google-auth</artifactId>
+        <groupId>com.github.canhnt.hippocms.plugins</groupId>
+        <artifactId>hippocms-plugin-google-auth</artifactId>
         <version>${hippo.forge.google-auth.version}</version>
       </dependency>
 
