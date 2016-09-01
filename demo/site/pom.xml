@@ -22,11 +22,6 @@
     </dependency>
 
     <dependency>
-      <groupId>org.onehippo.forge.google-auth</groupId>
-      <artifactId>hippo-plugin-google-auth</artifactId>
-    </dependency>
-
-    <dependency>
       <groupId>javax.servlet.jsp</groupId>
       <artifactId>jsp-api</artifactId>
     </dependency>

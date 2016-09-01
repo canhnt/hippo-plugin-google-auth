@@ -5,29 +5,30 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
-package org.onehippo.forge.googleauth.cms;
+package com.github.canhnt.hippocms.plugins.googleauth.cms;
 
 import java.security.AccessControlException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.MissingResourceException;
 
 import javax.jcr.SimpleCredentials;
 import javax.servlet.http.HttpSession;
 
+import com.github.canhnt.hippocms.plugins.googleauth.GHippoCredential;
+
 import org.apache.commons.lang.StringUtils;
-import org.apache.wicket.Application;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.CssHeaderItem;
@@ -41,14 +42,11 @@ import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.template.PackageTextTemplate;
-import org.hippoecm.frontend.Main;
 import org.hippoecm.frontend.model.UserCredentials;
-import org.hippoecm.frontend.plugins.login.ConcurrentLoginFilter;
-import org.hippoecm.frontend.plugins.login.LoginHandler;
+import org.hippoecm.frontend.plugins.login.ExtendConcurentLoginFilter;
 import org.hippoecm.frontend.session.LoginException;
 import org.hippoecm.frontend.session.PluginUserSession;
 import org.hippoecm.frontend.util.WebApplicationHelper;
-import org.onehippo.forge.googleauth.GHippoCredential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -69,7 +67,6 @@ public class GoogleLoginPanel extends Panel {
 
     private final String googleSignInClientId;
     private final String googleSignInScope;
-    private final LoginHandler handler;
     private final List<String> locales;
 
     private AbstractDefaultAjaxBehavior ajaxCallBackGoogleSignIn;
@@ -77,15 +74,10 @@ public class GoogleLoginPanel extends Panel {
     private String username;
 
     public GoogleLoginPanel(final String id,
-                            final boolean autoComplete,
                             final List<String> locales,
-                            final LoginHandler handler,
                             final String googleSignInClientId,
                             final String googleSignInScope) {
         super(id);
-
-
-        this.handler = handler;
         this.locales = locales;
 
         this.googleSignInClientId = googleSignInClientId;
@@ -153,7 +145,6 @@ public class GoogleLoginPanel extends Panel {
         response.render(MetaDataHeaderItem.forMetaTag(METATAG_GOOGLE_SIGNIN_CLIENT_ID, googleSignInClientId));
     }
 
-
     private void loginWithGSignIn() throws LoginException {
         PluginUserSession userSession = PluginUserSession.get();
 
@@ -163,34 +154,14 @@ public class GoogleLoginPanel extends Panel {
         userSession.login(new UserCredentials(creds));
 
         HttpSession session = WebApplicationHelper.retrieveWebRequest().getContainerRequest().getSession(true);
-        ConcurrentLoginFilter.validateSession(session, username, false);
+        ExtendConcurentLoginFilter.validateSession(session, username, false);
         userSession.setLocale(new Locale(locales.get(0)));
 
     }
 
-    protected  void loginSuccess() {
-        if (handler != null) {
-            handler.loginSuccess();
-        }
+    protected void loginSuccess() {
     }
 
     protected void loginFailed(final LoginException.Cause cause) {
-        Main main = (Main) Application.get();
-        main.resetConnection();
-
-        info(getReason(cause));
-    }
-
-    private String getReason(final LoginException.Cause cause) {
-        if (cause != null) {
-            try {
-                final String reason = getString(cause.getKey());
-                if (reason != null) {
-                    return reason;
-                }
-            } catch (MissingResourceException ignore) {
-            }
-        }
-        return getString(DEFAULT_KEY);
     }
 }

@@ -5,7 +5,7 @@
         <sv:value>profile</sv:value>
       </sv:property>
       <sv:property sv:name="plugin.class" sv:type="String" esv:merge="override">
-        <sv:value>org.onehippo.forge.googleauth.cms.GoogleLoginPlugin</sv:value>
+        <sv:value>com.github.canhnt.hippocms.plugins.googleauth.cms.GoogleLoginPlugin</sv:value>
       </sv:property>
       <sv:property sv:name="google.signin.clientid" sv:type="String">
         <sv:value>832528604166-nt3qbcpn7kh1knntmeu7thapnhoadf5o.apps.googleusercontent.com</sv:value>

@@ -14,20 +14,10 @@
  * limitations under the License.
  */
 
-package org.onehippo.forge.googleauth.cms;
+.hippo-login-form-container .hippo-google-signin-container {
+  text-align: center;
+}
 
-import org.hippoecm.frontend.plugins.cms.admin.users.User;
-import org.hippoecm.frontend.plugins.cms.root.UserMenu;
-import org.hippoecm.frontend.service.ILogoutService;
-
-public class GoogleLogoutUserMenu extends UserMenu {
-    public GoogleLogoutUserMenu(final String id, final User user, final ILogoutService logoutService) {
-        super(id, user, logoutService);
-    }
-
-    @Override
-    protected void onInitialize() {
-        super.onInitialize();
-        add(new GoogleLogoutBehavior());
-    }
+.hippo-login-form-container .hippo-google-signin-container .hippo-google-signin-button {
+  display: inline-block;
 }

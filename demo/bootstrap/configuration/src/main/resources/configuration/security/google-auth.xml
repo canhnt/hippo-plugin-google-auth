@@ -3,6 +3,6 @@
     <sv:value>hipposys:securityprovider</sv:value>
   </sv:property>
   <sv:property sv:name="hipposys:classname" sv:type="String">
-    <sv:value>org.onehippo.forge.googleauth.repository.GoogleSignInSecurityProvider</sv:value>
+    <sv:value>com.github.canhnt.hippocms.plugins.googleauth.repository.GoogleSignInSecurityProvider</sv:value>
   </sv:property>
 </sv:node>

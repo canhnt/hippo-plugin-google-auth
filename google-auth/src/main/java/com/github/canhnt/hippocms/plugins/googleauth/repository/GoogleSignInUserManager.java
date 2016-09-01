@@ -5,16 +5,17 @@
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
  *
- *      http://www.apache.org/licenses/LICENSE-2.0
+ *     http://www.apache.org/licenses/LICENSE-2.0
  *
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
  * limitations under the License.
+ *
  */
 
-package org.onehippo.forge.googleauth.repository;
+package com.github.canhnt.hippocms.plugins.googleauth.repository;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
@@ -28,6 +29,7 @@ import javax.jcr.SimpleCredentials;
 import javax.jcr.query.Query;
 import javax.jcr.query.QueryResult;
 
+import com.github.canhnt.hippocms.plugins.googleauth.GHippoCredential;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdToken;
 import com.google.api.client.googleapis.auth.oauth2.GoogleIdTokenVerifier;
 import com.google.api.client.http.javanet.NetHttpTransport;
@@ -38,7 +40,6 @@ import com.google.api.client.json.gson.GsonFactory;
 import org.apache.commons.lang.StringUtils;
 import org.hippoecm.repository.api.HippoNodeType;
 import org.hippoecm.repository.util.JcrUtils;
-import org.onehippo.forge.googleauth.GHippoCredential;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
