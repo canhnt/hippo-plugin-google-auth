@@ -26,6 +26,7 @@ import org.hippoecm.frontend.plugin.config.IPluginConfig;
 import org.hippoecm.frontend.plugins.login.DefaultLoginPlugin;
 import org.hippoecm.frontend.plugins.login.LoginHandler;
 import org.hippoecm.frontend.plugins.login.LoginPanel;
+import org.hippoecm.frontend.session.LoginException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -70,7 +71,17 @@ public class GoogleLoginPlugin extends DefaultLoginPlugin {
         protected void onInitialize() {
             super.onInitialize();
 
-            form.add(new GoogleLoginPanel("google-login-panel", locales, clientId, scope));
+            form.add(new GoogleLoginPanel("google-login-panel", locales, clientId, scope) {
+                @Override
+                protected void loginSuccess() {
+                    ExtendedLoginForm.this.loginSuccess();
+                }
+
+                @Override
+                protected void loginFailed(final LoginException.Cause cause) {
+                    ExtendedLoginForm.this.loginFailed(cause);
+                }
+            });
         }
 
         @Override

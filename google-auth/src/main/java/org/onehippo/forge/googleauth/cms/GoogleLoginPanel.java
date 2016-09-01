@@ -21,13 +21,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.MissingResourceException;
 
 import javax.jcr.SimpleCredentials;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.wicket.Application;
 import org.apache.wicket.ajax.AbstractDefaultAjaxBehavior;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.markup.head.CssHeaderItem;
@@ -41,7 +39,6 @@ import org.apache.wicket.request.cycle.RequestCycle;
 import org.apache.wicket.request.resource.CssResourceReference;
 import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.template.PackageTextTemplate;
-import org.hippoecm.frontend.Main;
 import org.hippoecm.frontend.model.UserCredentials;
 import org.hippoecm.frontend.plugins.login.ExtendConcurentLoginFilter;
 import org.hippoecm.frontend.session.LoginException;
@@ -79,8 +76,6 @@ public class GoogleLoginPanel extends Panel {
                             final String googleSignInClientId,
                             final String googleSignInScope) {
         super(id);
-
-
         this.locales = locales;
 
         this.googleSignInClientId = googleSignInClientId;
@@ -109,6 +104,7 @@ public class GoogleLoginPanel extends Panel {
 
                 try {
                     loginWithGSignIn();
+                    loginSuccess();
                 } catch (LoginException le) {
                     log.debug("Login failure!", le);
                     loginFailed(le.getLoginExceptionCause());
@@ -147,7 +143,6 @@ public class GoogleLoginPanel extends Panel {
         response.render(MetaDataHeaderItem.forMetaTag(METATAG_GOOGLE_SIGNIN_CLIENT_ID, googleSignInClientId));
     }
 
-
     private void loginWithGSignIn() throws LoginException {
         PluginUserSession userSession = PluginUserSession.get();
 
@@ -162,23 +157,9 @@ public class GoogleLoginPanel extends Panel {
 
     }
 
-    protected void loginFailed(final LoginException.Cause cause) {
-        Main main = (Main) Application.get();
-        main.resetConnection();
-
-        info(getReason(cause));
+    protected void loginSuccess() {
     }
 
-    private String getReason(final LoginException.Cause cause) {
-        if (cause != null) {
-            try {
-                final String reason = getString(cause.getKey());
-                if (reason != null) {
-                    return reason;
-                }
-            } catch (MissingResourceException ignore) {
-            }
-        }
-        return getString(DEFAULT_KEY);
+    protected void loginFailed(final LoginException.Cause cause) {
     }
 }
