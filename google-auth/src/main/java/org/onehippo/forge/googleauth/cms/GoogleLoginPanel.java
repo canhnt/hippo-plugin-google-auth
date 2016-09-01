@@ -43,8 +43,7 @@ import org.apache.wicket.request.resource.ResourceReference;
 import org.apache.wicket.util.template.PackageTextTemplate;
 import org.hippoecm.frontend.Main;
 import org.hippoecm.frontend.model.UserCredentials;
-import org.hippoecm.frontend.plugins.login.ConcurrentLoginFilter;
-import org.hippoecm.frontend.plugins.login.LoginHandler;
+import org.hippoecm.frontend.plugins.login.ExtendConcurentLoginFilter;
 import org.hippoecm.frontend.session.LoginException;
 import org.hippoecm.frontend.session.PluginUserSession;
 import org.hippoecm.frontend.util.WebApplicationHelper;
@@ -69,7 +68,6 @@ public class GoogleLoginPanel extends Panel {
 
     private final String googleSignInClientId;
     private final String googleSignInScope;
-    private final LoginHandler handler;
     private final List<String> locales;
 
     private AbstractDefaultAjaxBehavior ajaxCallBackGoogleSignIn;
@@ -77,15 +75,12 @@ public class GoogleLoginPanel extends Panel {
     private String username;
 
     public GoogleLoginPanel(final String id,
-                            final boolean autoComplete,
                             final List<String> locales,
-                            final LoginHandler handler,
                             final String googleSignInClientId,
                             final String googleSignInScope) {
         super(id);
 
 
-        this.handler = handler;
         this.locales = locales;
 
         this.googleSignInClientId = googleSignInClientId;
@@ -114,7 +109,6 @@ public class GoogleLoginPanel extends Panel {
 
                 try {
                     loginWithGSignIn();
-                    loginSuccess();
                 } catch (LoginException le) {
                     log.debug("Login failure!", le);
                     loginFailed(le.getLoginExceptionCause());
@@ -163,15 +157,9 @@ public class GoogleLoginPanel extends Panel {
         userSession.login(new UserCredentials(creds));
 
         HttpSession session = WebApplicationHelper.retrieveWebRequest().getContainerRequest().getSession(true);
-        ConcurrentLoginFilter.validateSession(session, username, false);
+        ExtendConcurentLoginFilter.validateSession(session, username, false);
         userSession.setLocale(new Locale(locales.get(0)));
 
-    }
-
-    protected  void loginSuccess() {
-        if (handler != null) {
-            handler.loginSuccess();
-        }
     }
 
     protected void loginFailed(final LoginException.Cause cause) {

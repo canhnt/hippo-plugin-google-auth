@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-.hippo-login-panel-header .hippo-google-signin-container {
+.hippo-login-form-container .hippo-google-signin-container {
   text-align: center;
 }
 
-.hippo-login-panel-header .hippo-google-signin-container .hippo-google-signin-button {
+.hippo-login-form-container .hippo-google-signin-container .hippo-google-signin-button {
   display: inline-block;
 }

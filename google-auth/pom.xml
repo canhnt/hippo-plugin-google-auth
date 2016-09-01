@@ -26,9 +26,8 @@
   <properties>
     <jcr.version>2.0</jcr.version>
 
-    <hippo.cms.version>4.0.0-CMS-9884-SNAPSHOT</hippo.cms.version>
-    <hippo.hst.version>4.0.0-SNAPSHOT</hippo.hst.version>
-    <hippo.repository.version>4.0.0-SNAPSHOT</hippo.repository.version>
+    <hippo.cms.version>4.0.2-SNAPSHOT</hippo.cms.version>
+    <hippo.repository.version>4.0.2-SNAPSHOT</hippo.repository.version>
     <google.api.client.version>1.21.0</google.api.client.version>
 
     <jackrabbit.version>2.10.1</jackrabbit.version>
@@ -154,20 +153,6 @@
       <groupId>org.onehippo.cms7</groupId>
       <artifactId>hippo-cms-perspectives</artifactId>
       <version>${hippo.cms.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.onehippo.cms7.hst</groupId>
-      <artifactId>hst-api</artifactId>
-      <version>${hippo.hst.version}</version>
-      <scope>provided</scope>
-    </dependency>
-
-    <dependency>
-      <groupId>org.onehippo.cms7.hst</groupId>
-      <artifactId>hst-commons</artifactId>
-      <version>${hippo.hst.version}</version>
       <scope>provided</scope>
     </dependency>
 

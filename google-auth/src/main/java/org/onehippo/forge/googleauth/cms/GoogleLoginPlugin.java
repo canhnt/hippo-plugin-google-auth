@@ -19,16 +19,18 @@ package org.onehippo.forge.googleauth.cms;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
-import org.apache.wicket.Component;
+import org.apache.wicket.markup.head.IHeaderResponse;
+import org.apache.wicket.markup.head.OnDomReadyHeaderItem;
 import org.hippoecm.frontend.plugin.IPluginContext;
 import org.hippoecm.frontend.plugin.config.IPluginConfig;
+import org.hippoecm.frontend.plugins.login.DefaultLoginPlugin;
 import org.hippoecm.frontend.plugins.login.LoginHandler;
-import org.hippoecm.frontend.plugins.login.SimpleLoginPlugin;
+import org.hippoecm.frontend.plugins.login.LoginPanel;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class GoogleLoginPlugin extends SimpleLoginPlugin {
+public class GoogleLoginPlugin extends DefaultLoginPlugin {
     private static final Logger log = LoggerFactory.getLogger(GoogleLoginPlugin.class);
 
     public static final String GOOGLE_SIGNIN_CLIENTID = "google.signin.clientid";
@@ -42,21 +44,49 @@ public class GoogleLoginPlugin extends SimpleLoginPlugin {
         clientId = config.getString(GOOGLE_SIGNIN_CLIENTID);
         scope = config.getString(GOOGLE_SIGNIN_SCOPE);
 
-        if (StringUtils.isEmpty(clientId)) {
-            log.error("Missing plugin paramemter '{}'", GOOGLE_SIGNIN_CLIENTID);
+        if (StringUtils.isBlank(clientId)) {
+            log.error("Missing plugin parameter '{}'", GOOGLE_SIGNIN_CLIENTID);
         }
 
-        if (StringUtils.isEmpty(scope)) {
-            log.error("Missing plugin paramemter '{}'", GOOGLE_SIGNIN_SCOPE);
+        if (StringUtils.isBlank(scope)) {
+            log.error("Missing plugin parameter '{}'", GOOGLE_SIGNIN_SCOPE);
         }
     }
 
     @Override
-    protected Component createLoginPanelHeader(final String id,
-                                               final boolean autoComplete,
-                                               final List<String> locales,
-                                               final LoginHandler handler) {
-//        return super.createLoginPanelHeader(id, autoComplete, locales, handler);
-        return new GoogleLoginPanel(id, autoComplete, locales, handler, clientId, scope);
+    protected LoginPanel createLoginPanel(final String id, final boolean autoComplete, final List<String> locales, final LoginHandler handler) {
+        return new ExtendedLoginForm(id, autoComplete, locales, handler);
+    }
+
+    private class ExtendedLoginForm extends LoginForm {
+        private final List<String> locales;
+
+        public ExtendedLoginForm(final String id, final boolean autoComplete, final List<String> locales, final LoginHandler handler) {
+            super(id, autoComplete, locales, handler);
+            this.locales = locales;
+        }
+
+        @Override
+        protected void onInitialize() {
+            super.onInitialize();
+
+            form.add(new GoogleLoginPanel("google-login-panel", locales, clientId, scope));
+        }
+
+        @Override
+        public void renderHead(final IHeaderResponse response) {
+            super.renderHead(response);
+
+            final String script = getRepositionScript();
+            response.render(OnDomReadyHeaderItem.forScript(script));
+        }
+
+        private String getRepositionScript() {
+            final StringBuilder script = new StringBuilder();
+            script.append("loginpanel = $('.hippo-login-form-container .hippo-google-signin-container');")
+                    .append("loginpanel.parent().prepend(loginpanel)");
+            return script.toString();
+        }
+
     }
 }
