@@ -61,7 +61,7 @@
   <properties>
 
     <!--***START temporary override of versions*** -->
-    <hippo.cms.version>4.0.2-SNAPSHOT</hippo.cms.version>
+    <hippo.cms.version>4.1.0-SNAPSHOT</hippo.cms.version>
     <hippo.forge.google-auth.version>1.0.0-SNAPSHOT</hippo.forge.google-auth.version>
     <!-- ***END temporary override of versions*** -->
 

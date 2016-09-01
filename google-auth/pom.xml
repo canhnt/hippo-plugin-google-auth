@@ -26,8 +26,8 @@
   <properties>
     <jcr.version>2.0</jcr.version>
 
-    <hippo.cms.version>4.0.2-SNAPSHOT</hippo.cms.version>
-    <hippo.repository.version>4.0.2-SNAPSHOT</hippo.repository.version>
+    <hippo.cms.version>4.1.0-SNAPSHOT</hippo.cms.version>
+    <hippo.repository.version>4.1.0-SNAPSHOT</hippo.repository.version>
     <google.api.client.version>1.21.0</google.api.client.version>
 
     <jackrabbit.version>2.10.1</jackrabbit.version>
