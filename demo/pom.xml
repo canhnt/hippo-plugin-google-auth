@@ -5,14 +5,14 @@
   <parent>
     <groupId>org.onehippo.cms7</groupId>
     <artifactId>hippo-cms7-release</artifactId>
-    <version>11.1.0-SNAPSHOT</version>
+    <version>11.0.0</version>
   </parent>
 
   <name>Hippo Plugin Google-Auth Demo</name>
   <description>Hippo Plugin Google-Auth Demo</description>
   <groupId>org.onehippo.cms</groupId>
   <artifactId>hippo-plugin-google-auth-demo</artifactId>
-  <version>1.1.0-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <packaging>pom</packaging>
 
   <!-- 
@@ -61,8 +61,8 @@
   <properties>
 
     <!--***START temporary override of versions*** -->
-    <hippo.cms.version>4.1.0-SNAPSHOT</hippo.cms.version>
-    <hippo.plugins.google-auth.version>1.1.0-SNAPSHOT</hippo.plugins.google-auth.version>
+    <hippo.cms.version>4.0.2-SNAPSHOT</hippo.cms.version>
+    <hippo.plugins.google-auth.version>1.0.0-SNAPSHOT</hippo.plugins.google-auth.version>
     <!-- ***END temporary override of versions*** -->
 
     <essentials.version>2.1.1</essentials.version>
