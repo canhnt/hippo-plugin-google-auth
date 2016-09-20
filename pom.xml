@@ -21,7 +21,7 @@
   <description>Google Authentication Plugin for Hippo CMS</description>
   <groupId>com.github.canhnt.hippocms.plugins</groupId>
   <artifactId>hippocms-plugin-google-auth</artifactId>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.1-SNAPSHOT</version>
 
   <licenses>
     <license>
@@ -35,6 +35,7 @@
     <url>https://github.com/canhnt/hippo-plugin-google-auth</url>
     <connection>scm:git:git://github.com/canhnt/hippo-plugin-google-auth.git</connection>
     <developerConnection>scm:git:git@github.com:canhnt/hippo-plugin-google-auth.git</developerConnection>
+    <tag>HEAD</tag>
   </scm>
 
   <developers>
@@ -49,8 +50,8 @@
   <properties>
     <jcr.version>2.0</jcr.version>
 
-    <hippo.cms.version>4.0.2-SNAPSHOT</hippo.cms.version>
-    <hippo.repository.version>4.0.2-SNAPSHOT</hippo.repository.version>
+    <hippo.cms.version>4.0.4-SNAPSHOT</hippo.cms.version>
+    <hippo.repository.version>4.0.4-SNAPSHOT</hippo.repository.version>
     <google.api.client.version>1.21.0</google.api.client.version>
 
     <jackrabbit.version>2.10.1</jackrabbit.version>
