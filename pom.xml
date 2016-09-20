@@ -23,6 +23,29 @@
   <artifactId>hippocms-plugin-google-auth</artifactId>
   <version>1.1.0-SNAPSHOT</version>
 
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+
+  <scm>
+    <url>https://github.com/canhnt/hippo-plugin-google-auth</url>
+    <connection>scm:git:git://github.com/canhnt/hippo-plugin-google-auth.git</connection>
+    <developerConnection>scm:git:git@github.com:canhnt/hippo-plugin-google-auth.git</developerConnection>
+  </scm>
+
+  <developers>
+    <developer>
+      <name>Canh Ngo</name>
+      <email>canhnt@gmail.com</email>
+      <url>https://github.com/canhnt</url>
+      <id>canhnt</id>
+    </developer>
+  </developers>
+
   <properties>
     <jcr.version>2.0</jcr.version>
 
@@ -63,27 +86,6 @@
     <plugin.cobertura.version>2.4</plugin.cobertura.version>
     <plugin.findbugs.version>2.3.2</plugin.findbugs.version>
   </properties>
-
-  <licenses>
-    <license>
-      <name>The Apache Software License, Version 2.0</name>
-      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-
-  <developers>
-    <developer>
-      <name>Canh Ngo</name>
-      <id>cngo</id>
-      <email>c.ngo @ onehippo . com</email>
-      <organization>Hippo</organization>
-      <roles>
-        <role>Java Developer</role>
-      </roles>
-      <timezone>+1</timezone>
-    </developer>
-  </developers>
 
   <repositories>
     <repository>
