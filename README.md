@@ -18,7 +18,7 @@ Admins can choose which users can login via Google accounts
 Add/modify values to the configuration path at `/hippo:configuration/hippo:frontend/login/login/loginPage`
 * Property: `plugin.class`
   * Type: `String`
-  * Value: `org.onehippo.forge.googleauth.cms.GoogleLoginPlugin`
+  * Value: `com.github.canhnt.hippocms.plugins.googleauth.cms.GoogleLoginPlugin`
 * Property: `google.signin.clientid`
   * Type: `String`
   * Value: `your google app client-id`
@@ -30,7 +30,7 @@ Add/modify values to the configuration path at `/hippo:configuration/hippo:front
 Create a new security provider at `/hippo:configuration/hippo:security/`
 ```
 + google-signin (hipposys:securityprovider)
-  - hipposys:classname (String): org.onehippo.forge.googleauth.repository.GoogleSignInSecurityProvider
+  - hipposys:classname (String): com.github.canhnt.hippocms.plugins.googleauth.repository.GoogleSignInSecurityProvider
 ```
 
 
